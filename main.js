@@ -147,6 +147,9 @@ while (ejecutar) {
     }*/
     ejecutar = confirm('¿Desea reiniciar el programa?');
 }
+
+
+
 //Funciones
 
 //Calcula las cantidades de combustible para los items principales segun regulaciones internacionales
@@ -156,12 +159,25 @@ function calculoCombustible(consumo, velCrucero) {
     extraFuel = (extra / 60) * consumo; // calculo combustible extra por contingencias
 
 }
-/*
+
 // Calcula el peso de despegue WIP
 function calculoPeso (plazas, mtow){
-    pasajeros += let adultos = pedirNumeroPositivo('Ingrese la cantidad de pasajeros');
-        while (pasajeros)
-}*/
+    pasajeros = 1;
+    let adultos = pedirNumeroPositivo('Ingrese la cantidad de pasajeros adultos.');
+    pasajeros += adultos
+        while (pasajeros > plazas) {
+            pasajeros = 1;
+            adultos = pedirNumeroPositivo('Esta excediendo la cantidad maxima de plazas de la aeronave, de ' + plazas + '. Por favor revise la cantidad de pasajeros.');
+            pasajeros += adultos;
+        }
+    let infantes = pedirNumeroPositivo('Ingrese la cantidad de pasajeros infantes.');
+    pasajeros += infantes
+        while (pasajeros > plazas) {
+            pasajeros = 1;
+            pasajeros += pedirNumeroPositivo('Esta excediendo la cantidad maxima de plazas de la aeronave de ' + plazas + '. Por favor revise la cantidad de infantes.');
+        }
+}
+
 // Pide un numero al usuario, y verifica que se ingrese un numero y sea positivo
 function pedirNumeroPositivo(mensaje) {
     let numero = Number(prompt(mensaje));
