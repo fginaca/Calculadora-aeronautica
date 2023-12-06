@@ -151,6 +151,12 @@ while (ejecutar) {
             }
         }
         ejecutarPeso = confirm('¿Desea volver a calcular peso?')
+        if (ejecutarCombustible) {
+            //Reiniciar banderas
+
+            invalidAcftCode = true;
+            invalidFuel = true;
+        }
     }
     ejecutar = confirm('¿Desea reiniciar el programa?');
 }
