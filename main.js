@@ -23,13 +23,20 @@ let pasajeros = 1;
 
 const capacidadTanquePA38 = 110; // litros
 const consumoPA38 = 22; // litros por hora a velocidad crucero
-const velCruceroPA38 = 100 // nudos (millas nauticas por hora)
+const velCruceroPA38 = 100; // nudos (millas nauticas por hora)
+const plazasPA38 = 2; // personas
+const cargoPA38 = 35; // kilogramos
+const mtowPA38 = 800; // kilogramos
+
 
     //C152
 
 const capacidadTanqueC152 = 95.74; // litros
 const consumoC152 = 23.1; // litros por hora a velocidad crucero
-const velCruceroC152 = 95 // nudos (millas nauticas por hora)
+const velCruceroC152 = 95; // nudos (millas nauticas por hora)
+const plazasC152 = 2; // personas
+const cargoC152 = 35; // kilogramos
+const mtowC152 = 700; // kilogramos
 
 //Programa principal
 while (ejecutar) {
@@ -112,31 +119,31 @@ while (ejecutar) {
         console.log(extraFuel)*/
 
 
-        //Reiniciar banderas
-
-        invalidAcftCode = true;
-        invalidFuel = true;
+        
 
         // Consulta si quiere volver a calcular combustible
+        ejecutarCombustible = confirm('¿Desea volver a calcular combustible?')
 
-        ejecutarCombustible = confirm('¿Desea volver a calcular combustible?');
+        if (ejecutarCombustible) {
+            //Reiniciar banderas
+
+            invalidAcftCode = true;
+            invalidFuel = true;
+        }
     }
 
     // Calculo de peso WIP 
-    /*
     let ejecutarPeso = confirm('¿Desea realizar calculos de peso?');
     while (ejecutarPeso) {
         while (invalidAcftCode) {
             aeronave = prompt('Ingrese el designador OACI de la aeronave: ').toUpperCase(); 
             switch (aeronave) {
                 case 'PA38':
-                    calculoCombustible (consumoPA38, velCruceroPA38);
-                    capacidad = capacidadTanquePA38;
+                    calculoPeso (plazasPA38, cargoPA38, mtowPA38);
                     invalidAcftCode = false;
                     break;
                 case 'C152':
-                    calculoCombustible (consumoC152, velCruceroC152);
-                    capacidad = capacidadTanqueC152;
+                    calculoPeso (plazasC152, cargoC152, mtowC152);
                     invalidAcftCode = false;
                     break;
                 default:
@@ -144,7 +151,7 @@ while (ejecutar) {
             }
         }
         ejecutarPeso = confirm('¿Desea volver a calcular peso?')
-    }*/
+    }
     ejecutar = confirm('¿Desea reiniciar el programa?');
 }
 
@@ -161,21 +168,34 @@ function calculoCombustible(consumo, velCrucero) {
 }
 
 // Calcula el peso de despegue WIP
-function calculoPeso (plazas, mtow){
-    pasajeros = 1;
-    let adultos = pedirNumeroPositivo('Ingrese la cantidad de pasajeros adultos.');
-    pasajeros += adultos
-        while (pasajeros > plazas) {
-            pasajeros = 1;
-            adultos = pedirNumeroPositivo('Esta excediendo la cantidad maxima de plazas de la aeronave, de ' + plazas + '. Por favor revise la cantidad de pasajeros.');
-            pasajeros += adultos;
+function calculoPeso (plazas, cargo, mtow) {
+    pesoTotal = 0;
+    do {
+        if(pesoTotal > mtow) {
+            alert('Se ha excedido el peso maximo de despegue, reduzca el pasaje y/o el equipaje.');
         }
-    let infantes = pedirNumeroPositivo('Ingrese la cantidad de pasajeros infantes.');
-    pasajeros += infantes
-        while (pasajeros > plazas) {
-            pasajeros = 1;
-            pasajeros += pedirNumeroPositivo('Esta excediendo la cantidad maxima de plazas de la aeronave de ' + plazas + '. Por favor revise la cantidad de infantes.');
+        // Peso pasajeros
+        pasajeros = 0;
+        let adultos = pedirNumeroPositivo('Ingrese la cantidad de pasajeros adultos.');
+        let infantes = pedirNumeroPositivo('Ingrese la cantidad de infantes.');
+        pasajeros = adultos + infantes;
+        while (pasajeros > plazas){
+            alert('Se excedio la cantidad de ' + plazas + ' plazas disponibles en la aeronave. Por favor revise el pasaje.')
+            pasajeros = adultos = infantes = 0;
+            adultos = pedirNumeroPositivo('Ingrese la cantidad de pasajeros adultos.');
+            infantes = pedirNumeroPositivo('Ingrese la cantidad de infantes.');
+            pasajeros = adultos + infantes;
         }
+        pesoPax = adultos * 75 + infantes * 35;
+        // Peso carga
+        let equipaje = pedirNumeroPositivo('Ingrese la cantidad de equipaje en kilogramos:');
+        while (equipaje > cargo) {
+            alert('Ha excedido la capacidad de la bahia de carga, por favor revise que su equipaje pese menos de ' + cargo + ' kilogramos.');
+            equipaje = pedirNumeroPositivo('Ingrese la cantidad de equipaje en kilogramos:');
+        }
+        // Peso total
+        pesoTotal = equipaje + pesoPax;
+    } while (pesoTotal > mtow);
 }
 
 // Pide un numero al usuario, y verifica que se ingrese un numero y sea positivo
