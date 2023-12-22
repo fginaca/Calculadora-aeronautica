@@ -52,7 +52,7 @@ class Aeronave {
         this.mtow = mtow;
     }
 }
-aeronaves.push( new Aeronave('PA38', 110, 22, 100, 2, 35, 700));
+aeronaves.push( new Aeronave('PA38', 112, 22, 100, 2, 35, 700));
 aeronaves.push( new Aeronave('C152', 95.74, 23.1, 95, 2, 35, 700));
 
 
@@ -131,7 +131,7 @@ while (ejecutar) {
             // Imprimo resultados por pantalla
 
 
-        if (resultados.totalFuel <= aeronaves[indexAcft].capacidad) {
+        if (resultados.totalFuel <= aeronaves[indexAcft].tanque) {
             if (datosDeEntrada.unidadComb == 'galones') {
                 resultados.totalFuel = (resultados.totalFuel * 0.264172).toFixed(2);
                 resultados.tripFuel = (resultados.tripFuel * 0.264172).toFixed(2);
@@ -143,7 +143,7 @@ while (ejecutar) {
                 resultados.altnFuel = resultados.altnFuel.toFixed(2);
                 resultados.extraFuel = resultados.extraFuel.toFixed(2);
             }
-            alert('Combustible necesario para el vuelo: ' + resultados.tripFuel + ' ' + resultados.unidadComb + '. \nCombustible necesario para la alernativa: ' + resultados.altnFuel + ' ' + datosDeEntrada.unidadComb + '. \nCombustible para ' + datosDeEntrada.extra + ' minutos por contingencias: ' + resultados.extraFuel + ' ' + datosDeEntrada.unidadComb + '\nCombustible total: ' + resultados.totalFuel + ' ' + datosDeEntrada.unidadComb + '. \n¡Buen vuelo!');
+            alert('Combustible necesario para el vuelo: ' + resultados.tripFuel + ' ' + datosDeEntrada.unidadComb + '. \nCombustible necesario para la alernativa: ' + resultados.altnFuel + ' ' + datosDeEntrada.unidadComb + '. \nCombustible para ' + datosDeEntrada.extra + ' minutos por contingencias: ' + resultados.extraFuel + ' ' + datosDeEntrada.unidadComb + '\nCombustible total: ' + resultados.totalFuel + ' ' + datosDeEntrada.unidadComb + '. \n¡Buen vuelo!');
         } else {
             alert('La capacidad de combustible de la aeronave no es suficiente para el vuelo.');
         }
@@ -151,11 +151,14 @@ while (ejecutar) {
         //debugging 
 
         /*console.log(totalFuel)
-        console.log(tripFuel)
+        console.log(tripFuel)   
         console.log(altnFuel)
         console.log(extraFuel)*/
 
 
+        console.table(datosDeEntrada);
+        console.table(resultados);
+        console.table(aeronaves[indexAcft]);
         
 
         // Consulta si quiere volver a calcular combustible
