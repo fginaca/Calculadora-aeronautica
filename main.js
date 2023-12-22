@@ -38,6 +38,9 @@ const plazasC152 = 2; // personas
 const cargoC152 = 35; // kilogramos
 const mtowC152 = 700; // kilogramos
 
+
+
+
 //Programa principal
 while (ejecutar) {
 
@@ -71,8 +74,8 @@ while (ejecutar) {
 
             // Calculo de las cantidades de combustible necesarias
 
+        aeronave = prompt('Ingrese el designador OACI de la aeronave: ').toUpperCase(); 
         while (invalidAcftCode) {
-            aeronave = prompt('Ingrese el designador OACI de la aeronave: ').toUpperCase(); 
             switch (aeronave) {
                 case 'PA38':
                     calculoCombustible (consumoPA38, velCruceroPA38);
