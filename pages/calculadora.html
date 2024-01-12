@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/general.css">
+    <link rel="stylesheet" href="../CSS/calculadora.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1> Calculadora</h1>
+    <Section>
+        <div id="datos">
+            <form>
+                <label for="acft">Designador OACI de la aeronave:</label>
+                <input type="text" name="acft" id="acft">
+                <label for="trip">Distancia vuelo:</label>
+                <input type="number" name="trip" id="trip">
+                <label for="altn">Distancia a alternativa:</label>
+                <input type="number" name="altn" id="altn">
+                <label for="extra">Tiempo extra por contigencias (en minutos):</label>
+                <input type="number" name="extra" id="extra">
+                <input type="submit" id="btn_calcular" value="Calcular">
+            </form>
+        </div>
+        <div id="respuestas">
+            respuestas  
+        </div>
+    </Section>
+
+    <script src="../JS/calculadora.js"></script>
+</body>
+</html>

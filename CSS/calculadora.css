@@ -1,0 +1,26 @@
+:root {
+    --celeste: #79a8b6;
+    --blanco: #fefcf1;
+    --azul_oscuro: #0d3776; 
+    --fuente: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html{
+    height: 100vh;
+    font-family: var(--fuente);
+}
+section {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+} 
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div {
+    padding-inline: 10vw;
+}
