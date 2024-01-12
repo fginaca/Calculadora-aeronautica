@@ -18,7 +18,16 @@ class Aeronave {
         this.mtow = mtow;
     }
 }
-
+ class Ruta {
+    constructor(nombre,acft,trip,altn,extra,total) {
+        this.nombre = nombre;
+        this.acft = acft;
+        this.trip = trip;
+        this.altn = altn;
+        this.extra = extra;
+        this.total = total;
+    }
+ }
 // creacion base de datos aeronaves 
 
 let aeronaves = [];
@@ -43,6 +52,10 @@ let resultados = {
     extraFuel: 0,
     totalFuel: 0,
 }
+
+let ruta_guardada = new Ruta ()
+
+
 // traigo formulario
 let form = document.querySelector ('form');
 
@@ -51,10 +64,21 @@ let form = document.querySelector ('form');
 let result = document.querySelector('#respuestas');
 // main
 
-// Tomo los datos del formulario
+// funcion de boton para cargar resultados guradados
+
+let boton = document.querySelector('button');
+boton.addEventListener('click', ()=> {
+    ruta_guardada = JSON.parse(localStorage.getItem('ruta_guardada_local'));
+    mostrarObjetoComoLista(result,ruta_guardada);
+    boton.remove();
+})
+// Tomo los datos del formulario, hago los calculos y los muestro por pantalla
 
 form.addEventListener('submit', (e)=> {
     e.preventDefault();
+
+    result.innerHTML = ``;
+
     datosDeEntrada.aeronave = (document.querySelector('#acft').value).toUpperCase();
     datosDeEntrada.trip = document.querySelector('#trip').value;
     datosDeEntrada.altn = document.querySelector('#altn').value;
@@ -83,6 +107,27 @@ form.addEventListener('submit', (e)=> {
     resultados = calculoCombustible (aeronaves[indexAcft].consumo, aeronaves[indexAcft].velCrucero);
     
     resultados.totalFuel <= aeronaves[indexAcft].tanque ? mostrarObjetoComoLista (result, resultados) : alert(`La capacidad de combustible de la aeronave no es suficiente para el vuelo.`);
+
+    let input = document.createElement('input');
+    input.placeholder = `Nombre de la ruta`;
+    input.type = 'text';
+    input.id = 'nombre_ruta';
+    result.append (input);
+
+    
+    let boton = document.createElement ('button');
+    boton.innerText = `Guardar resultados`;
+    boton.addEventListener('click', ()=> {
+        ruta_guardada.nombre = document.querySelector('#nombre_ruta').value;
+        ruta_guardada.acft = datosDeEntrada.aeronave;
+        ruta_guardada.trip = resultados.tripFuel;
+        ruta_guardada.altn = resultados.altnFuel;
+        ruta_guardada.extra = resultados.extraFuel;
+        ruta_guardada.total = resultados.totalFuel;
+
+        localStorage.setItem('ruta_guardada_local', JSON.stringify(ruta_guardada));
+    })
+    result.append (boton);
 })
 
 
@@ -101,9 +146,9 @@ function calculoCombustible(consumo, velCrucero) {
         extraFuel: 0,
         totalFuel: 0,
     }
-    resCombu.tripFuel = (datosDeEntrada.trip / velCrucero) * consumo; // calculo combustible para el viaje
-    resCombu.altnFuel = (datosDeEntrada.altn / velCrucero) * consumo; // calculo combustible extra para llegar a la alternativa
-    resCombu.extraFuel = (datosDeEntrada.extra / 60) * consumo; // calculo combustible extra por contingencias
+    resCombu.tripFuel = Number(((datosDeEntrada.trip / velCrucero) * consumo).toFixed(2)); // calculo combustible para el viaje
+    resCombu.altnFuel = Number(((datosDeEntrada.altn / velCrucero) * consumo).toFixed(2)); // calculo combustible extra para llegar a la alternativa
+    resCombu.extraFuel = Number(((datosDeEntrada.extra / 60) * consumo).toFixed(2)); // calculo combustible extra por contingencias
     resCombu.totalFuel = resCombu.tripFuel + resCombu.altnFuel + resCombu.extraFuel;
     return resCombu;
 }

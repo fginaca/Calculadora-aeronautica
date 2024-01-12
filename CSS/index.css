@@ -24,14 +24,13 @@ h1 {
     color:var(--blanco);
     text-shadow: 0px 0px 1vh var(--azul_oscuro);
 }
-button {
+/* button {
     padding: 2vh;
     padding-top: 1vh;
     padding-bottom: 1vh;
     font-size: 3vh;
     background-color: var(--azul_oscuro);
     color: var(--blanco);
-    /* border-color: var(--blanco); */
     border-radius: 1vh;
 }
 button:hover{
@@ -41,4 +40,4 @@ button:hover{
 button:active{
     scale: 1;
     box-shadow: none;
-}
+} */
