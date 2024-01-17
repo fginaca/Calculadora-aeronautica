@@ -16,3 +16,7 @@ h1 {
     /* text-shadow: 0px 0px 1vh var(--verde_claro); */
 }
 
+.boton {
+    font-size: 2vh;
+    border-width: 0.25vh;
+}
