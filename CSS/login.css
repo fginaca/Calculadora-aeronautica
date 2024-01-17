@@ -1,0 +1,18 @@
+:root {
+    --celeste: #c6f2ff;
+    --blanco: #fefcf1;
+    --azul_oscuro: #0d3776; 
+    --fuente: Verdana, Geneva, Tahoma, sans-serif;
+    --roboto: 'Roboto Mono', monospace;
+    --verde:  #00ea527d;
+    --verde_claro: #44ff28; 
+
+}
+
+h1 {
+    font-size: 8vh;
+    text-align: center;
+    /* color:var(--blanco); */
+    /* text-shadow: 0px 0px 1vh var(--verde_claro); */
+}
+

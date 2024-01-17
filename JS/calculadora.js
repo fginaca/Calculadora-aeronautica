@@ -53,7 +53,7 @@ let resultados = {
     totalFuel: 0,
 }
 
-let ruta_guardada = new Ruta ()
+let ruta_guardada = new Ruta ();
 
 
 // traigo formulario
