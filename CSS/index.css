@@ -1,14 +1,4 @@
-:root {
-    --celeste: #c6f2ff;
-    --blanco: #fefcf1;
-    --azul_oscuro: #0d3776; 
-    --fuente: Verdana, Geneva, Tahoma, sans-serif;
-    --roboto: 'Roboto Mono', monospace;
-    --verde:  #00ea527d;
-    --verde_claro: #44ff28;
-    --bkgn: #151515;
-
-}
+@import 'general.css';
 
 /* html {
     height: 100vh;
