@@ -32,8 +32,24 @@ class Aeronave {
 
 let aeronaves = [];
 
-aeronaves.push( new Aeronave('PA38', 112, 22, 100, 2, 35, 700));
-aeronaves.push( new Aeronave('C152', 95.74, 23.1, 95, 2, 35, 700));
+// aeronaves.push( new Aeronave('PA38', 112, 22, 100, 2, 35, 700));
+// aeronaves.push( new Aeronave('C152', 95.74, 23.1, 95, 2, 35, 700));
+
+// traigo los datos de la base de datos de aeronaves
+
+fetch('../acft_db.json')
+    .then(response => response.json())
+    .then(data => aeronaves = data)
+    .catch(error => {
+        Swal.fire({
+            title: 'Error',
+            text: 'No se encontró la base de datos de aeronaves',
+            // icon: 'error',
+            color: '#44ff28',
+            background: '#151515',
+            showConfirmButton: false,        
+        })
+    })
 
 // objetos con datos
 

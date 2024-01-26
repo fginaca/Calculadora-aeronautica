@@ -5,7 +5,7 @@
     --fuente: 'Roboto Mono', monospace;
     --roboto: 'Roboto Mono', monospace;
     --chakra: 'Chakra Petch', sans-serif;
-    --verde:  #00ea52;
+    --verde:  #00ea52b3;
     --verde_claro: #44ff28;
     --bkgn: #151515;
 
@@ -22,8 +22,8 @@ body {
     /* font-family:'Times New Roman', Times, serif; */
     /* background-color: var(--bkgn); */
     /* background-image: radial-gradient(#524a3c 0.01%, var(--bkgn) ); */
-    background-color: #433c2e ;
-    text-shadow: 0px 0px 5vh var(--verde) ;
+    background-color: #1e1c19 ;
+    text-shadow: 0px 0px 3vh var(--verde) ;
     color: var(--verde_claro);
     height: 90%;
     display: flex;
@@ -39,9 +39,9 @@ body {
     background: none;
     font-family: var(--fuente) ;
     color: var(--verde_claro);
-    text-shadow: 0px 0px 5vh var(--verde) ;
+    text-shadow: 0px 0px 3vh var(--verde) ;
     border: 0.5vh solid var(--verde_claro);
-    box-shadow: 0px 0px 2vh var(--verde), inset 0px 0px 2vh var(--verde);
+    box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
     border-radius: 1vh;
     margin: 1vh;    
 }
@@ -108,6 +108,13 @@ input {
     border: 1px solid var(--verde_claro);
     border-radius: 0.5vh;
     box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
-
+    
     /* box-shadow: inset 0px 0px 1vh var(--azul_oscuro); */
+}
+
+.swal2-popup {
+    border: 1px solid var(--verde_claro);
+    border-radius: 3vh;
+    box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
+
 }

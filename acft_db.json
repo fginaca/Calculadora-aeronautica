@@ -1,0 +1,5 @@
+[
+    {"modelo": "PA38", "tanque": 112, "consumo": 22, "velCrucero": 100, "plazas": 2, "cargo":   35, "mtow": 700},
+    {"modelo": "C152", "tanque": 95.74, "consumo": 23.1, "velCrucero": 95, "plazas": 2, "cargo": 35, "mtow": 700},
+    {"modelo": "C172", "tanque": 95.74, "consumo": 23.1, "velCrucero": 95, "plazas": 2, "cargo": 35, "mtow": 700}
+]
