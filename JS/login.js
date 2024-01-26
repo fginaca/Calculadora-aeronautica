@@ -9,6 +9,7 @@ class Usuario {
 let usuarios = [];
 let lista_nombres = [];
 let login = new Usuario ();
+let datos_ventana_login;
 // let usuario;
 // let pass;
 
@@ -17,7 +18,7 @@ let login = new Usuario ();
 
 if (localStorage.getItem('usuarios')) {
     usuarios = JSON.parse (localStorage.getItem('usuarios'));
-    console.log('se descargo lista de usuarios')
+    // console.log('se descargo lista de usuarios')
 }
 
 //Creo una lista con los nombres de los usuarios guardados
@@ -54,8 +55,55 @@ form.addEventListener('submit', (e) => {
     
     if (!lista_nombres.includes (login.nombre)) {
         // alert('Usuario inexistente');
-        mensaje.innerHTML = `El usuario "${login.nombre}" no existe`;
-        mensaje.className = 'alerta';
+        // mensaje.innerHTML = `El usuario "${login.nombre}" no existe`;
+        // mensaje.className = 'alerta';
+        Swal.fire({
+            title: 'Usuario inexistente',
+            text: '¿Desea crear un usuario?',
+            // icon: 'error',
+            color: '#44ff28',
+            background: '#151515',
+            // showConfirmButton: false,
+            confirmButtonText: 'Crear nuevo usuario',
+            confirmButtonColor: '#151515',
+            showCancelButton: true,
+            cancelButtonText: 'Vovler',
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: 'boton',
+                cancelButton: 'boton',
+            }    
+        }) 
+        .then((result) => {
+            if (result.isConfirmed) {
+                datos_ventana_login = Swal.fire ({
+                    title: 'Crear nuevo usuario',
+                    color: '#44ff28',
+                    background: '#151515',
+                    html:  `
+                    <div>
+                        <label for="ventana_usuario" >Ususario:</label>
+                        <input type="text" name="ventana_usuario" id="ventana_usuario">
+                    </div>
+                    <div>
+                        <label for="ventana_Contraseña" >Contraseña:</label>
+                        <input type="password" name="ventana_password" id="ventana_pass">
+                    </div>
+                    `,
+                    preConfirm: () => {
+                        return [
+                          document.getElementById("ventana_usuario").value,
+                          document.getElementById("ventana_pass").value
+                        ];
+                    },
+                    customClass: {
+                        confirmButton: 'boton',
+                        cancelButton: 'boton', 
+                    }
+                })
+            }   
+        })
+
         
     } else if (usuarios[lista_nombres.indexOf (login.nombre)].pass == login.pass) {
         sessionStorage.setItem ('usuario_logeado', JSON.stringify(login));        
@@ -63,8 +111,22 @@ form.addEventListener('submit', (e) => {
         mensaje.innerHTML = ``;
     } else {
         // alert('Contraseña incorrecta');
-        mensaje.innerHTML = `Contraseña incorrecta`;
-        mensaje.className = 'alerta';
+        // mensaje.innerHTML = `Contraseña incorrecta`;
+        // mensaje.className = 'alerta';
+        Swal.fire({
+            title: 'Contraseña incorrecta',
+            text: 'intente de nuevo por favor',
+            // icon: 'error',
+            color: '#44ff28',
+            background: '#151515',
+            // showConfirmButton: false,
+            confirmButtonText: 'Volver',
+            confirmButtonColor: '#151515',
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: 'boton',
+            }    
+        })
     }
 })
 

@@ -99,17 +99,21 @@ label {
     /* text-shadow: 0px 0px 1vh var(--azul_oscuro); */
 }
 
-input {
+input, .swal2-input {
     /* background:  #fefcf127; */
     font-family: var(--fuente);
     color: var(--verde_claro);
     text-shadow: 0px 0px 5vh var(--verde);
     background: none;
     border: 1px solid var(--verde_claro);
-    border-radius: 0.5vh;
+    border-radius: 1vh;
     box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
     
     /* box-shadow: inset 0px 0px 1vh var(--azul_oscuro); */
+}
+
+.swal2-input {
+    border-radius: 1vh;
 }
 
 .swal2-popup {
