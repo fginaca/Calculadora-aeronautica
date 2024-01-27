@@ -54,16 +54,11 @@ form.addEventListener('submit', (e) => {
     login.pass = document.querySelector ('#pass').value;
     
     if (!lista_nombres.includes (login.nombre)) {
-        // alert('Usuario inexistente');
-        // mensaje.innerHTML = `El usuario "${login.nombre}" no existe`;
-        // mensaje.className = 'alerta';
         Swal.fire({
             title: 'Usuario inexistente',
             text: '¿Desea crear un usuario?',
-            // icon: 'error',
             color: '#44ff28',
             background: '#151515',
-            // showConfirmButton: false,
             confirmButtonText: 'Crear nuevo usuario',
             confirmButtonColor: '#151515',
             showCancelButton: true,
@@ -76,32 +71,8 @@ form.addEventListener('submit', (e) => {
         }) 
         .then((result) => {
             if (result.isConfirmed) {
-                datos_ventana_login = Swal.fire ({
-                    title: 'Crear nuevo usuario',
-                    color: '#44ff28',
-                    background: '#151515',
-                    html:  `
-                    <div>
-                        <label for="ventana_usuario" >Ususario:</label>
-                        <input type="text" name="ventana_usuario" id="ventana_usuario">
-                    </div>
-                    <div>
-                        <label for="ventana_Contraseña" >Contraseña:</label>
-                        <input type="password" name="ventana_password" id="ventana_pass">
-                    </div>
-                    `,
-                    preConfirm: () => {
-                        return [
-                          document.getElementById("ventana_usuario").value,
-                          document.getElementById("ventana_pass").value
-                        ];
-                    },
-                    customClass: {
-                        confirmButton: 'boton',
-                        cancelButton: 'boton', 
-                    }
-                })
-            }   
+                crear_nuevo_usuario ();
+            }  
         })
 
         
@@ -110,16 +81,11 @@ form.addEventListener('submit', (e) => {
         location.href = 'calculadora.html';
         mensaje.innerHTML = ``;
     } else {
-        // alert('Contraseña incorrecta');
-        // mensaje.innerHTML = `Contraseña incorrecta`;
-        // mensaje.className = 'alerta';
         Swal.fire({
             title: 'Contraseña incorrecta',
             text: 'intente de nuevo por favor',
-            // icon: 'error',
             color: '#44ff28',
             background: '#151515',
-            // showConfirmButton: false,
             confirmButtonText: 'Volver',
             confirmButtonColor: '#151515',
             buttonsStyling: false,
@@ -135,41 +101,59 @@ form.addEventListener('submit', (e) => {
 
 
 let boton = document.querySelector ('button');
-// boton.classList.add ('boton');
-// boton.id = 'crear_usuario';
-// boton.innerText = 'Crear usuario nuevo';
 boton.addEventListener ('mouseup', ()=> {
+    crear_nuevo_usuario ();
+})
+
+console.table(usuarios)
+
+
+
+function crear_nuevo_usuario () {
     if (login.nombre != '' && login.nombre != undefined && login.pass != '' && login.pass != undefined) {
         if (lista_nombres.includes (login.nombre)) {
-            // alert ('El usuario ingresado ya existe')
-            mensaje.innerHTML = `El usuario "${login.nombre}" ya existe`;
-            mensaje.className = 'alerta';
+            Swal.fire({
+                title: `El usuario "${login.nombre}" ya existe`,
+                text: 'Intente de nuevo por favor',
+                // icon: 'error',
+                color: '#44ff28',
+                background: '#151515',
+                // showConfirmButton: false,
+                confirmButtonText: 'Volver',
+                confirmButtonColor: '#151515',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'boton',
+                }    
+            })
         } else {
             login.nombre = document.querySelector ('#usuario').value;
             login.pass = document.querySelector ('#pass').value;
             usuarios.push (login);
-            lista_nombres = [];
-            
+            lista_nombres = [];        
             for (let el of usuarios) {
                 lista_nombres.push (el.nombre);
-            }
-            
-            localStorage.setItem ('usuarios', JSON.stringify(usuarios));
-            // alert ('Has creado satisfactoriamente tu usuario.');
-            // let body = document.querySelector ('body');
-            // body.append (boton);
-            mensaje.innerHTML = `Has creado satisfactoriamente tu usuario`;
-            mensaje.className = 'ok';
-            
+            }          
+            localStorage.setItem ('usuarios', JSON.stringify(usuarios));            
+            Swal.fire({
+                title: `Has creado satisfactoriamente tu usuario`,
+                text: 'Inicia sesión por favor',
+                // icon: 'error',
+                color: '#44ff28',
+                background: '#151515',
+                // showConfirmButton: false,
+                confirmButtonText: 'Volver',
+                confirmButtonColor: '#151515',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'boton',
+                }    
+            })      
         }
     } else {
         // alert('Inserte un nombre de usuario y contraseña')
         mensaje.innerHTML = `Inserte un nombre de usuario y/o contraseña`;
         mensaje.className = 'alerta';
     }
-})
-
-console.table(usuarios)
-//form.addEventListener ('submit', (e) => {})
-
+}
 
