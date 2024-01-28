@@ -19,3 +19,61 @@ form {
 div {
     padding-inline: 5vw;
 }
+
+.boton {
+    padding: 1vh;
+    font-size: 2vh;
+    border: 0.3vh solid var(--verde_claro);
+}
+
+#unidades {
+    display: flex;
+    flex-direction: row;
+}
+
+#unidades ul li {
+    /* color:  #45ff283e; */
+    opacity: 0.25;
+}
+
+#unidades ul li:hover {
+    scale: 1.07;
+}
+
+#unidades ul li:active {
+    scale: 1;
+}
+
+.selected {
+    /* color: var(--verde_claro); */
+    opacity: 1.0 !important;
+}
+
+#respuestas div {
+    display: flex;
+    flex-direction: row;
+}
+
+#nombre_ruta {
+    margin-left: 2vh;
+    margin-bottom: 1vh;
+    margin-top: 3vh ;
+}
+
+#rutas_guardadas {
+    display: flex;
+    flex-direction: column;
+}
+
+#lista_rutas li {
+    opacity: 0.4;
+}
+
+#lista_rutas li:hover {
+    opacity: 1;
+    scale: 1.1;
+}
+#lista_rutas li:active {
+    scale: 1;
+}
+

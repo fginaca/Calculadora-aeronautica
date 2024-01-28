@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="../CSS/calculadora.css">
     <title>Calculadora</title>
 </head>
+
 <body>
     <h1> Calculadora</h1>
     <Section id="calculadora">
@@ -24,27 +26,35 @@
                 <input type="number" name="altn" id="altn">
                 <label for="extra">Tiempo extra por contigencias (en minutos):</label>
                 <input type="number" name="extra" id="extra">
+                <div id="unidades">
+                    <p>Resultados en:</p>
+                    <ul>
+                        <li class="selected" id="litros">Litros</li>
+                        <li id="galones">Galones US</li>
+                    </ul>
+                </div>
                 <input type="submit" id="btn_calcular" class="boton" value="Calcular">
             </form>
         </div>
-        <div id="respuestas">
-            <p>respuestas</p>
-        </div>
+        <template>
+            <div id="respuestas">
+                <ul>
+                </ul>
+            </div>
+        </template>
 
     </Section>
     </Section>
-    <section id="rutas_guardadas">
-        <h2>rutas_guardadas</h2>
-    </section>
-    <template>
-        <div>
-            Resultados:
-            <div>
-                <Button>Cargar ruta guardada</Button>
+    <section>
+        <div id="rutas_guardadas">
+            <h2>Rutas guardadas:</h2>
+            <ul id="lista_rutas">
+            </ul>
         </div>
-    </template>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../JS/calculadora.js"></script>
 </body>
+
 </html>

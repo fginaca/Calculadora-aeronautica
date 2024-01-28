@@ -11,17 +11,13 @@
 
 }
 
+
 html {
     height: 100vh;
     box-shadow: inset 0px 0px 20vh black    ;
 }
 body {
-    
-    /* background-image: linear-gradient(to bottom, var(--azul_oscuro) 10%, var(--celeste) 60%, var(--blanco)); */
     font-family: var(--fuente);
-    /* font-family:'Times New Roman', Times, serif; */
-    /* background-color: var(--bkgn); */
-    /* background-image: radial-gradient(#524a3c 0.01%, var(--bkgn) ); */
     background-color: #1e1c19 ;
     text-shadow: 0px 0px 3vh var(--verde) ;
     color: var(--verde_claro);
@@ -47,8 +43,8 @@ body {
 }
 .boton:hover{
     scale: 1.1;
-    /* box-shadow: 0px 0px 5vh var(--azul_oscuro); */
 }
+
 .boton:active{
     scale: 1;
     box-shadow: none;
@@ -64,17 +60,13 @@ body {
     font-family: var(--fuente);
     color: var(--verde_claro);
     text-shadow: 0px 0px 2vh var(--verde) ;
-    /* color: var(--blanco); */
-    /* text-shadow: 0px 0px 1vh var(--azul_oscuro); */
 }
 
 .boton_lite:hover {
-    /* color: var(--bkgn); */
     scale: 0.9;
     border: 0.1vh solid var(--verde_claro);
     box-shadow: 0px 0px 2vh var(--verde), inset 0px 0px 2vh var(--verde);
-    border-radius: 1vh;
-    
+    border-radius: 1vh;   
 }
 
 .alerta {
@@ -83,7 +75,6 @@ body {
 
 .ok {
     color: #45f181;
-    /* text-shadow: 0px 0px 5px var(--azul_oscuro); */
     background-color: #0d3776;
     border-radius: 1vh;
     padding: 1vh;
@@ -95,12 +86,9 @@ label {
     font-size: 2.5vh;
     text-shadow: 0px 0px 5vh var(--verde) ;
     font-family: var(--fuente);
-    /* color: var(--azul_oscuro); */
-    /* text-shadow: 0px 0px 1vh var(--azul_oscuro); */
 }
 
 input, .swal2-input {
-    /* background:  #fefcf127; */
     font-family: var(--fuente);
     color: var(--verde_claro);
     text-shadow: 0px 0px 5vh var(--verde);
@@ -108,8 +96,6 @@ input, .swal2-input {
     border: 1px solid var(--verde_claro);
     border-radius: 1vh;
     box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
-    
-    /* box-shadow: inset 0px 0px 1vh var(--azul_oscuro); */
 }
 
 .swal2-input {
@@ -120,5 +106,11 @@ input, .swal2-input {
     border: 1px solid var(--verde_claro);
     border-radius: 3vh;
     box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
+    
+}
 
+.radio {
+    box-shadow: none;
+    margin: 1vh;    
+    margin-top: 2vh;
 }
