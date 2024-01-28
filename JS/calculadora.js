@@ -321,7 +321,7 @@ function mostrar_rutas_guardadas() {
             unidad = JSON.parse(localStorage.getItem(`usuarios`))[lista_nombres.indexOf(JSON.parse(sessionStorage.getItem(`usuario_logeado`)))].rutas[lista_rutas.indexOf(el.nombre)].unidad;
             console.log(unidad)
 
-            revisar_unidades ();
+            revisar_unidades (); 
             console.log(unidad)
 
 
