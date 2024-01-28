@@ -10,15 +10,13 @@ let usuarios = [];
 let lista_nombres = [];
 let login = new Usuario ();
 let datos_ventana_login;
-// let usuario;
-// let pass;
+
 
 
 // Traigo del local el array de usuarios y lo guardo en 'usuarios'.
 
 if (localStorage.getItem('usuarios')) {
     usuarios = JSON.parse (localStorage.getItem('usuarios'));
-    // console.log('se descargo lista de usuarios')
 }
 
 //Creo una lista con los nombres de los usuarios guardados
@@ -104,9 +102,6 @@ let boton = document.querySelector ('button');
 boton.addEventListener ('mouseup', ()=> {
     crear_nuevo_usuario ();
 })
-
-console.table(usuarios)
-
 
 
 function crear_nuevo_usuario () {

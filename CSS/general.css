@@ -13,7 +13,7 @@
 
 html {
     height: 100vh;
-    box-shadow: inset 0px 0px 20vh black;
+    box-shadow: inset 0px 0px 20vh black    ;
 }
 body {
     
@@ -43,7 +43,7 @@ body {
     border: 0.5vh solid var(--verde_claro);
     box-shadow: 0px 0px 1vh var(--verde), inset 0px 0px 1vh var(--verde);
     border-radius: 1vh;
-    margin: 1vh;    
+    margin: 2vh;    
 }
 .boton:hover{
     scale: 1.1;

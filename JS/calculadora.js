@@ -4,20 +4,21 @@ let invalidAcftCode = true;
 let invalidFuel = true;
 let ejecutar = true;
 let indexAcft = 0;
+let error = false;
 
 // creacion de clases
 
-class Aeronave {
-    constructor(modelo,tanque,consumo,velCrucero,plazas,cargo,mtow) {
-        this.modelo = modelo;
-        this.tanque = tanque;
-        this.consumo = consumo;
-        this.velCrucero = velCrucero;
-        this.plazas = plazas;
-        this.cargo = cargo;
-        this.mtow = mtow;
-    }
-}
+// class Aeronave {
+//     constructor(modelo,tanque,consumo,velCrucero,plazas,cargo,mtow) {
+//         this.modelo = modelo;
+//         this.tanque = tanque;
+//         this.consumo = consumo;
+//         this.velCrucero = velCrucero;
+//         this.plazas = plazas;
+//         this.cargo = cargo;
+//         this.mtow = mtow;
+//     }
+// }
  class Ruta {
     constructor(nombre,acft,trip,altn,extra,total) {
         this.nombre = nombre;
@@ -31,15 +32,21 @@ class Aeronave {
 // creacion base de datos aeronaves 
 
 let aeronaves = [];
+let lista_aeronaves = [];
 
 // aeronaves.push( new Aeronave('PA38', 112, 22, 100, 2, 35, 700));
 // aeronaves.push( new Aeronave('C152', 95.74, 23.1, 95, 2, 35, 700));
 
-// traigo los datos de la base de datos de aeronaves
+// traigo los datos de la base de datos de aeronaves y creo lista con los modelos en la base de datos
 
 fetch('../acft_db.json')
     .then(response => response.json())
-    .then(data => aeronaves = data)
+    .then(data => {
+        aeronaves = data
+        for ( let el of aeronaves) {
+            lista_aeronaves.push (el.modelo)
+        }
+    })
     .catch(error => {
         Swal.fire({
             title: 'Error',
@@ -52,6 +59,7 @@ fetch('../acft_db.json')
     })
 
 // objetos con datos
+
 
 let datosDeEntrada = {
     aeronave: 'aeronave',
@@ -82,12 +90,12 @@ let result = document.querySelector('#respuestas');
 
 // funcion de boton para cargar resultados guradados
 
-let boton = document.querySelector('button');
-boton.addEventListener('click', ()=> {
-    ruta_guardada = JSON.parse(localStorage.getItem('ruta_guardada_local'));
-    mostrarObjetoComoLista(result,ruta_guardada);
-    boton.remove();
-})
+// let boton = document.querySelector('button');
+// boton.addEventListener('click', ()=> {
+//     ruta_guardada = JSON.parse(localStorage.getItem('ruta_guardada_local'));
+//     mostrarObjetoComoLista(result,ruta_guardada);
+//     boton.remove();
+// })
 // Tomo los datos del formulario, hago los calculos y los muestro por pantalla
 
 form.addEventListener('submit', (e)=> {
@@ -100,29 +108,27 @@ form.addEventListener('submit', (e)=> {
     datosDeEntrada.altn = document.querySelector('#altn').value;
     datosDeEntrada.extra = document.querySelector('#extra').value;
 
-    switch (datosDeEntrada.aeronave) {
-        case 'PA38':
-            // calculoCombustible (aeronaves[0].consumo, aeronaves[0].velCrucero);
-            // capacidad = capacidadTanquePA38;
-            indexAcft = 0;
-            invalidAcftCode = false;
-            break;
-        case 'C152':
-            // calculoCombustible (consumoC152, velCruceroC152);
-            // capacidad = capacidadTanqueC152;
-            indexAcft = 1;
-            invalidAcftCode = false;
-            break;
-        default:
-    }
+    indexAcft = lista_aeronaves.indexOf (datosDeEntrada.aeronave);
 
-    invalidAcftCode && alert(`La aeronave no esta en la base de datos, intente con PA38 o C152`);
+    indexAcft == -1 &&  (
+        mostrar_mensaje (`Codigo de aeronave invalido`, `El codigo ingresado no está en la base de datos`),
+        error = true
+    )
+
+    // alert(`La aeronave no esta en la base de datos, intente con PA38 o C152`);
     invalidAcftCode = true;
-    datosDeEntrada.extra < 30 && alert('Tiempo extra por contingencias no puede ser inferior a 30 minutos, intentelo nuevamente.');
+    datosDeEntrada.extra < 30 && (
+        mostrar_mensaje (`FUERA DE NORMA`, `Tiempo extra por contingencias no debe ser inferior a 30 minutos`),
+        error = true
+    )
+    
+    
+    // alert('Tiempo extra por contingencias no puede ser inferior a 30 minutos, intentelo nuevamente.');
     
     resultados = calculoCombustible (aeronaves[indexAcft].consumo, aeronaves[indexAcft].velCrucero);
     
-    resultados.totalFuel <= aeronaves[indexAcft].tanque ? mostrarObjetoComoLista (result, resultados) : alert(`La capacidad de combustible de la aeronave no es suficiente para el vuelo.`);
+    resultados.totalFuel <= aeronaves[indexAcft].tanque ? mostrarObjetoComoLista (result, resultados) : mostrar_mensaje (`PELIGRO`, `La capacidad de combustible de la aeronave es insuficiente para el vuelo`);
+    
 
     let input = document.createElement('input');
     input.placeholder = `Nombre de la ruta`;
@@ -176,4 +182,19 @@ function mostrarObjetoComoLista (padre, objeto) {
         p.innerText = `${propiedad}: ${objeto[propiedad]}`;
         padre.append(p);
     }
+}
+
+function mostrar_mensaje (titulo, mensaje) {
+    Swal.fire({
+        title: `${titulo}`,
+        text: `${mensaje}`,
+        color: '#44ff28',
+        background: '#151515',
+        confirmButtonText: 'Volver',
+        confirmButtonColor: '#151515',
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: 'boton',
+        }    
+    })
 }
