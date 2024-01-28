@@ -143,9 +143,9 @@ let lista_nombres = [];
 for (let el of usuarios) {
     lista_nombres.push(el.nombre);
 }
-console.table(lista_nombres)
+
 let usuario_logeado = usuarios[lista_nombres.indexOf(JSON.parse(sessionStorage.getItem(`usuario_logeado`)))];
-console.table(usuario_logeado);
+
 
 let lista = document.querySelector(`#lista_rutas`);
 
@@ -214,8 +214,7 @@ form.addEventListener('submit', (e) => {
         // ruta_guardada.altn = resultados.altnFuel;
         // ruta_guardada.extra = resultados.extraFuel;
         // ruta_guardada.total = resultados.totalFuel;
-        console.log(unidad)
-        if (document.querySelector('#nombre_ruta').value != ``) {
+            if (document.querySelector('#nombre_ruta').value != ``) {
             let ruta_guardar = new Ruta(document.querySelector('#nombre_ruta').value, document.querySelector('#acft').value.toUpperCase (), resultados.tripFuel, resultados.altnFuel, resultados.extraFuel, resultados.totalFuel, unidad);
 
             !lista_rutas.includes(ruta_guardar.nombre) ? usuario_logeado.rutas.push(ruta_guardar) : mostrar_mensaje(`La ruta ya existe`, `Ingrese un nombre distinto`)
@@ -319,12 +318,9 @@ function mostrar_rutas_guardadas() {
             resultados.extraFuel = JSON.parse(localStorage.getItem(`usuarios`))[lista_nombres.indexOf(JSON.parse(sessionStorage.getItem(`usuario_logeado`)))].rutas[lista_rutas.indexOf(el.nombre)].extra;
             resultados.totalFuel = JSON.parse(localStorage.getItem(`usuarios`))[lista_nombres.indexOf(JSON.parse(sessionStorage.getItem(`usuario_logeado`)))].rutas[lista_rutas.indexOf(el.nombre)].total;
             unidad = JSON.parse(localStorage.getItem(`usuarios`))[lista_nombres.indexOf(JSON.parse(sessionStorage.getItem(`usuario_logeado`)))].rutas[lista_rutas.indexOf(el.nombre)].unidad;
-            console.log(unidad)
-
+            
             revisar_unidades (); 
-            console.log(unidad)
-
-
+            
             mostrar_resultados(resultados);
 
             let padre = document.querySelector(`#respuestas`);
